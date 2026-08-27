@@ -59,6 +59,15 @@ input{
     right: -530px;
 }
 
+.contenedorFigura{
+    border: 2px dashed blue;
+    position: relative;
+    bottom: 200px;
+    margin: 5px;
+    width: 500px;
+    height: 400px;
+}
+
 .intentos .numIntentos{
     font-size: 50px;
     text-align: center;
@@ -78,4 +87,36 @@ button{
 
 button:hover{
     background-color: silver;
+}
+
+.btnReiniciar{
+    margin: 50px;
+    padding: 10px 25px;
+}
+
+.contenedorPalabra{
+    position: absolute;
+    left: 15px;
+}
+
+.contenedorLetra{
+    position: absolute;
+    right: 15px;
+}
+
+@media (max-width: 1760px){
+
+    .contenedorPalabra,
+    .contenedorLetra{
+        position: static;
+        margin: 5px;
+    }
+
+    .contenedorPalabra{
+        order: 1;
+    }
+
+    .contenedorLetra{
+        order: 2;
+    }
 }
