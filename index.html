@@ -14,7 +14,7 @@
                 <div class="intentos">
                     <span><strong>N. Intentos</strong></span>
                     <p class="numIntentos">
-                        <strong>5</strong>
+                        <strong id="intento" >5</strong>
                     </p>
                 </div>
 
@@ -30,12 +30,12 @@
 
             <div class="contenedorPalabra">
                 
-                <input type="password" placeholder="Ingrese PALABRA" id="palabra" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')">
+                <input type="password" placeholder="Ingrese PALABRA" id="palabra" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g,)">
                 <button class="btnIngresarPalabra">Ingrese palabra</button>
             </div>
 
             <div class="contenedorLetra">
-                <input type="text" placeholder="Ingrese una letra: " id="letra" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')" maxlength="1">
+                <input type="text" placeholder="Ingrese una letra: " id="letra" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g,)" maxlength="1">
                 <button class="btnIngresarletra">Ingrese letra</button>
             </div>
 

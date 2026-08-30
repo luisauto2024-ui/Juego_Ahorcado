@@ -21,8 +21,15 @@ const adivPalabra = document.querySelector(".palabraAdivinar")
 const inputletraAdiv = document.getElementById('letra')
 const botonSelecLetra = document.querySelector(".btnIngresarletra")
 const botonReiniciar = document.querySelector('.btnReiniciar')
+const etiquetaIntento = document.getElementById('intento')
 
-let vidas = 0
+let vidas = ''
+
+function quitarVida(vidas){
+    let vida = parseInt(vidas)
+    vida=vida-1;
+    return `${vida}`;
+}
 
 boton.addEventListener('click',()=>{
     arregloEspacios=[]
@@ -31,21 +38,52 @@ boton.addEventListener('click',()=>{
     letrasPalabra.map((letra)=>{
         arregloEspacios.push("_")
     })
-    adivPalabra.innerHTML = `<p><strong>${arregloEspacios.join(" ")}</strong></p>` 
+    adivPalabra.innerHTML = `<p><strong>${arregloEspacios.join(" ")}</strong></p>`
+    boton.id = 'btn-palabra'
+    palabra.setAttribute('readonly', true)
 
 });
 
 botonSelecLetra.addEventListener('click',()=>{
     let letra = inputletraAdiv.value.toLowerCase()
     let cont = 0;
+    let acumulado=0;
     for (const valor of letrasPalabra) {
         
         if(valor === letra){
             arregloEspacios[cont]=letra
-        } cont++
+        }else{
+            acumulado++
+        } 
+        cont++    
     }
-    adivPalabra.innerHTML = `<p><strong>${arregloEspacios.join(" ")}</strong></p>` 
-    inputletraAdiv.value = ''
+    if(acumulado===letrasPalabra.length){
+        
+        if(etiquetaIntento.textContent > 1){
+            vidas = etiquetaIntento.textContent
+            let reducir = quitarVida(vidas);
+            etiquetaIntento.textContent = reducir;
+        }else{
+            vidas = etiquetaIntento.textContent
+            let reducir = quitarVida(vidas);
+            etiquetaIntento.textContent = reducir;
+            vidas = etiquetaIntento.textContent    
+        }
+        
+    }
+    if(vidas === '0'){
+        adivPalabra.innerHTML = `<p><strong>PERDISTE!! LA PALABRA ERA: 
+        ${letrasPalabra.join(" ")}</strong></p>`
+        botonSelecLetra.id = 'btn-letra'
+        inputletraAdiv.setAttribute('readonly',true)
+        
+    }else{
+        adivPalabra.innerHTML = `<p><strong>${arregloEspacios.join(" ")}</strong></p>` 
+        inputletraAdiv.value = ''
+        //console.log(letrasPalabra.join(" "))
+        
+    }
+    
     
 })
 
@@ -54,6 +92,10 @@ botonReiniciar.addEventListener('click', () => {
     adivPalabra.innerHTML = ''
     letra.value = ''
     palabra.value = ''
+    botonSelecLetra.id =''
+    boton.id = ''
+    palabra.setAttribute('readonly', false)
+    inputletraAdiv.setAttribute('readonly',false)
 
 })
 
