@@ -14,6 +14,8 @@ window.addEventListener('beforeunload', () => {
 
 let letrasPalabra 
 let arregloEspacios = [];
+let arregloLetrasNoAdiv = [];
+
 
 const palabra = document.getElementById('palabra')
 const boton = document.querySelector(".btnIngresarPalabra")
@@ -22,8 +24,10 @@ const inputletraAdiv = document.getElementById('letra')
 const botonSelecLetra = document.querySelector(".btnIngresarletra")
 const botonReiniciar = document.querySelector('.btnReiniciar')
 const etiquetaIntento = document.getElementById('intento')
+const divletrasNoAdiv = document.querySelector('.letrasUsadas')
 
 let vidas = ''
+let permiso = true;
 
 function quitarVida(vidas){
     let vida = parseInt(vidas)
@@ -59,26 +63,50 @@ botonSelecLetra.addEventListener('click',()=>{
     if(letra.length<1){
         alert("Debe introducir una letra")
         return
-    } else{
+    }else{
         for (const valor of letrasPalabra) {
             if(valor === letra){
                 arregloEspacios[cont]=letra
             }else{
                 acumulado++
             } 
-            cont++    
+            cont++
         }
-        if(acumulado===letrasPalabra.length){
-        
-            if(etiquetaIntento.textContent > 1){
-                vidas = etiquetaIntento.textContent
-                let reducir = quitarVida(vidas);
-                etiquetaIntento.textContent = reducir;
+
+        if(acumulado===letrasPalabra.length){//falla con el digito
+            
+            if(etiquetaIntento.textContent > 1){//oportunidad
+                if(permiso){
+                    arregloLetrasNoAdiv.push(letra)
+                    vidas = etiquetaIntento.textContent
+                    let reducir = quitarVida(vidas);
+                    etiquetaIntento.textContent = reducir;
+                    divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
+                    permiso = false
+                }else{
+                    let acceso = arregloLetrasNoAdiv.find((valor)=> letra === valor)
+                    if(acceso){
+                        divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
+                    }else{
+                        arregloLetrasNoAdiv.push(letra)
+                        vidas = etiquetaIntento.textContent
+                        let reducir = quitarVida(vidas);
+                        etiquetaIntento.textContent = reducir;
+                        divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
+                    }
+                }                
             }else{
-                vidas = etiquetaIntento.textContent
-                let reducir = quitarVida(vidas);
-                etiquetaIntento.textContent = reducir;
-                vidas = etiquetaIntento.textContent    
+                let acceso = arregloLetrasNoAdiv.find((valor)=> letra === valor)
+                    if(acceso){
+                        divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
+                    }else{
+                        arregloLetrasNoAdiv.push(letra)
+                        vidas = etiquetaIntento.textContent
+                        let reducir = quitarVida(vidas);
+                        etiquetaIntento.textContent = reducir;
+                        divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
+                        vidas = etiquetaIntento.textContent
+                    }
             }
             
         }
@@ -92,8 +120,8 @@ botonSelecLetra.addEventListener('click',()=>{
             inputletraAdiv.value = ''
             //console.log(letrasPalabra.join(" "))
             }
-        }
-       
+        
+        }    
 })
 
 botonReiniciar.addEventListener('click', () => {
@@ -105,7 +133,10 @@ botonReiniciar.addEventListener('click', () => {
     boton.id = ''
     palabra.removeAttribute('readonly')
     inputletraAdiv.removeAttribute('readonly')
-   // etiquetaIntento.textContent = 5
-
+    etiquetaIntento.textContent = '5'
+    vidas = ''
+    arregloLetrasNoAdiv = [];
+    divletrasNoAdiv.innerHTML = '<p></p>'
+    permiso = true
 })
 
