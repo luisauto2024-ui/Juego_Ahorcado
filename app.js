@@ -32,59 +32,68 @@ function quitarVida(vidas){
 }
 
 boton.addEventListener('click',()=>{
+    let letras = palabra.value.toLowerCase();
+
+    if(letras.length < 1){
+        alert("Debe introducir una palabra, para jugar")
+        return
+    }
     arregloEspacios=[]
-    let letras = palabra.value.toLowerCase()
-    letrasPalabra = letras.split("")
+    letrasPalabra = letras.split("");
     letrasPalabra.map((letra)=>{
-        arregloEspacios.push("_")
+    arregloEspacios.push("_")
     })
+    
     adivPalabra.innerHTML = `<p><strong>${arregloEspacios.join(" ")}</strong></p>`
     boton.id = 'btn-palabra'
     palabra.setAttribute('readonly', true)
 
 });
 
+
 botonSelecLetra.addEventListener('click',()=>{
     let letra = inputletraAdiv.value.toLowerCase()
     let cont = 0;
     let acumulado=0;
-    for (const valor of letrasPalabra) {
-        
-        if(valor === letra){
-            arregloEspacios[cont]=letra
-        }else{
-            acumulado++
-        } 
-        cont++    
-    }
-    if(acumulado===letrasPalabra.length){
-        
-        if(etiquetaIntento.textContent > 1){
-            vidas = etiquetaIntento.textContent
-            let reducir = quitarVida(vidas);
-            etiquetaIntento.textContent = reducir;
-        }else{
-            vidas = etiquetaIntento.textContent
-            let reducir = quitarVida(vidas);
-            etiquetaIntento.textContent = reducir;
-            vidas = etiquetaIntento.textContent    
+    
+    if(letra.length<1){
+        alert("Debe introducir una letra")
+        return
+    } else{
+        for (const valor of letrasPalabra) {
+            if(valor === letra){
+                arregloEspacios[cont]=letra
+            }else{
+                acumulado++
+            } 
+            cont++    
         }
+        if(acumulado===letrasPalabra.length){
         
-    }
-    if(vidas === '0'){
-        adivPalabra.innerHTML = `<p><strong>PERDISTE!! LA PALABRA ERA: 
-        ${letrasPalabra.join(" ")}</strong></p>`
-        botonSelecLetra.id = 'btn-letra'
-        inputletraAdiv.setAttribute('readonly',true)
-        
-    }else{
-        adivPalabra.innerHTML = `<p><strong>${arregloEspacios.join(" ")}</strong></p>` 
-        inputletraAdiv.value = ''
-        //console.log(letrasPalabra.join(" "))
-        
-    }
-    
-    
+            if(etiquetaIntento.textContent > 1){
+                vidas = etiquetaIntento.textContent
+                let reducir = quitarVida(vidas);
+                etiquetaIntento.textContent = reducir;
+            }else{
+                vidas = etiquetaIntento.textContent
+                let reducir = quitarVida(vidas);
+                etiquetaIntento.textContent = reducir;
+                vidas = etiquetaIntento.textContent    
+            }
+            
+        }
+        if(vidas === '0'){
+            adivPalabra.innerHTML = `<p><strong>PERDISTE!! LA PALABRA ERA: 
+            ${letrasPalabra.join(" ")}</strong></p>`
+            botonSelecLetra.id = 'btn-letra'
+            inputletraAdiv.setAttribute('readonly',true)
+        }else{
+            adivPalabra.innerHTML = `<p><strong>${arregloEspacios.join(" ")}</strong></p>` 
+            inputletraAdiv.value = ''
+            //console.log(letrasPalabra.join(" "))
+            }
+        }
+       
 })
 
 botonReiniciar.addEventListener('click', () => {
@@ -94,8 +103,9 @@ botonReiniciar.addEventListener('click', () => {
     palabra.value = ''
     botonSelecLetra.id =''
     boton.id = ''
-    palabra.setAttribute('readonly', false)
-    inputletraAdiv.setAttribute('readonly',false)
+    palabra.removeAttribute('readonly')
+    inputletraAdiv.removeAttribute('readonly')
+   // etiquetaIntento.textContent = 5
 
 })
 
