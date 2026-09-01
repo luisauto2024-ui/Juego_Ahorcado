@@ -45,13 +45,9 @@ input{
     
 }
 
-/*div img{
-    
-    text-align: center;
-}*/
+img {
+    width: 280px;
 
-#imagen {
-    width: 200px;
 }
 
 .palabraAdivinar p{
@@ -76,13 +72,14 @@ input{
 }
 
 .contenedorFigura{
-    border: 2px dashed blue;
+    
     position: relative;
     border-radius: 15%;
     bottom: 200px;
     margin: 5px;
     width: 500px;
     height: 350px;
+    background-color: #fff;
 }
 
 .intentos .numIntentos{
@@ -129,6 +126,15 @@ button:hover{
 .contenedorLetra{
     position: absolute;
     right: 15px;
+}
+
+.contenedorImagen{
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 @media (max-width: 1760px){

@@ -25,6 +25,7 @@ const botonSelecLetra = document.querySelector(".btnIngresarletra")
 const botonReiniciar = document.querySelector('.btnReiniciar')
 const etiquetaIntento = document.getElementById('intento')
 const divletrasNoAdiv = document.querySelector('.letrasUsadas')
+const etiquetaSection = document.querySelector('.contenedorImagen')
 
 let vidas = ''
 let permiso = true;
@@ -81,6 +82,8 @@ botonSelecLetra.addEventListener('click',()=>{
                     vidas = etiquetaIntento.textContent
                     let reducir = quitarVida(vidas);
                     etiquetaIntento.textContent = reducir;
+                    vidas = etiquetaIntento.textContent
+                    etiquetaSection.innerHTML = `<img src="${vidas}.png" width="200" id="imagen">`
                     divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
                     permiso = false
                 }else{
@@ -92,6 +95,8 @@ botonSelecLetra.addEventListener('click',()=>{
                         vidas = etiquetaIntento.textContent
                         let reducir = quitarVida(vidas);
                         etiquetaIntento.textContent = reducir;
+                        vidas = etiquetaIntento.textContent
+                        etiquetaSection.innerHTML = `<img src="${vidas}.png" width="200" id="imagen">`
                         divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
                     }
                 }                
@@ -106,6 +111,7 @@ botonSelecLetra.addEventListener('click',()=>{
                         etiquetaIntento.textContent = reducir;
                         divletrasNoAdiv.innerHTML = `<p> Letras Usadas: ${arregloLetrasNoAdiv.join(",")}</p>`
                         vidas = etiquetaIntento.textContent
+                        etiquetaSection.innerHTML = `<img src="${vidas}.png" width="200" id="imagen">`
                     }
             }
             
@@ -133,7 +139,11 @@ botonReiniciar.addEventListener('click', () => {
     boton.id = ''
     palabra.removeAttribute('readonly')
     inputletraAdiv.removeAttribute('readonly')
-
-
+    etiquetaIntento.textContent = '5'
+    vidas = ''
+    arregloLetrasNoAdiv = [];
+    divletrasNoAdiv.innerHTML = '<p></p>'
+    etiquetaSection.innerHTML = `<img src="imagenInicio.png" width="200" id="imagen">`
+    permiso = true
 })
 
