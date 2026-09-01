@@ -42,6 +42,16 @@ input{
     border-radius: 15%;
     width: 800px;
     height: 600px;
+    
+}
+
+/*div img{
+    
+    text-align: center;
+}*/
+
+#imagen {
+    width: 200px;
 }
 
 .palabraAdivinar p{
@@ -94,6 +104,11 @@ button{
 
 #btn-letra, #btn-palabra{
     display: none;
+}
+
+.letrasUsadas p{
+    color:white;
+    font-size: 28px;
 }
 
 button:hover{
