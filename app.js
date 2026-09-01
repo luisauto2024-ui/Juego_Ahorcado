@@ -105,7 +105,7 @@ botonReiniciar.addEventListener('click', () => {
     boton.id = ''
     palabra.removeAttribute('readonly')
     inputletraAdiv.removeAttribute('readonly')
-   // etiquetaIntento.textContent = 5
-
+    etiquetaIntento.textContent = 5
+    vidas = ''
 })
 
